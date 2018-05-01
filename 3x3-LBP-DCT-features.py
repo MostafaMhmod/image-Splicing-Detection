@@ -34,21 +34,15 @@ def getFeatures(img, transformed_img):
             bottom_left   = get_pixel_else_0(img, x-1, y+1)
             bottom_right  = get_pixel_else_0(img, x+1, y+1)
             bottom_down   = get_pixel_else_0(img, x,   y+1 )
-
-            values = thresholded(center, [top_left, top_up, top_right, right, bottom_right,
-                                      bottom_down, bottom_left, left])
-
+            values = thresholded(center, [top_left, top_up, top_right, right, bottom_right, bottom_down, bottom_left, left])
             weights = [1, 2, 4, 8, 16, 32, 64, 128]
             res = 0
             for a in range(0, len(values)):
                 res += weights[a] * values[a]
 
             transformed_img.itemset((x,y), res)
+
     return [img,transformed_img]
-
-    
-    
-
 
 img1 = cv2.imread("t.jpg")
 img = cv2.cvtColor(img1, cv2.COLOR_BGR2YUV)
@@ -61,7 +55,7 @@ features = getFeatures(img, transformed_img)
 cv2.imshow('image', features[0])
 cv2.imshow('thresholded image', features[1])
 
-hist,bins = np.histogram(img.flatten(),256,[0,256])
+# hist,bins = np.histogram(img.flatten(),256,[0,256])
 
 cdf = hist.cumsum()
 cdf_normalized = cdf * hist.max()/ cdf.max()
