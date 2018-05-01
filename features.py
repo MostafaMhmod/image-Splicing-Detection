@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+from scipy import fftpack
 
 def thresholded(center, pixels):
     out = []
@@ -45,6 +46,7 @@ def dct_2D(img):
     return fftpack.dct(fftpack.dct(img.T, norm='ortho').T, norm='ortho')
 
 
+
 img = cv2.imread("t.jpg")
 img1 = cv2.imread("t.jpg",0)
 transformed_img = cv2.cvtColor(img, cv2.COLOR_BGR2YCR_CB)
@@ -55,14 +57,12 @@ blocks = np.zeros(cr.shape)
 im_h, im_w = (cr.shape[:2])
 bl_h, bl_w = 16, 16
 
-print(img[0])
-print("++++++++++++++++")
-print(cr[0])
-print("****************")
-print(img1[0])
+crChannelAfterLBP = LBP_3x3(cr)
+dctMatrix=dct_2D(crChannelAfterLBP)
 
 
-cv2.imshow('thresholded image', LBP_3x3(cr))
+
+# cv2.imshow('thresholded image', LBP_3x3(cr))
 
 
 #TRY to apply LBP_3x3 to each block instead of all of it for better results
