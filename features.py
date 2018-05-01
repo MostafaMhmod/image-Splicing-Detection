@@ -48,14 +48,17 @@ y,cr,cb = cv2.split(transformed_img)
 
 # cv2.imshow('thresholded image', LBP(cr))
 
-blocks = np.zeros(transformed_img.shape)
-im_h, im_w = (transformed_img.shape[:2])
+blocks = np.zeros(cr.shape)
+im_h, im_w = (cr.shape[:2])
 bl_h, bl_w = 16, 16
 
-print(transformed_img[0])
-print("++++++++++++++++")
 print(img[0])
-cv2.imshow('thresholded image', LBP(img1))
+print("++++++++++++++++")
+print(cr[0])
+print("****************")
+print(img1[0])
+
+cv2.imshow('thresholded image', LBP(cr))
 
 
 #TRY to apply LBP to each block instead of all of it 
