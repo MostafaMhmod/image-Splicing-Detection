@@ -17,7 +17,7 @@ def get_pixel_else_0(l, idx, idy, default=0):
         return default
 
 
-def LBP(img):
+def LBP_3x3(img):
     transformed_img=img
 
     for x in range(0, len(img)):
@@ -41,12 +41,15 @@ def LBP(img):
 
     return transformed_img
 
+def dct_2D(img):
+    return fftpack.dct(fftpack.dct(img.T, norm='ortho').T, norm='ortho')
+
+
 img = cv2.imread("t.jpg")
 img1 = cv2.imread("t.jpg",0)
 transformed_img = cv2.cvtColor(img, cv2.COLOR_BGR2YCR_CB)
 y,cr,cb = cv2.split(transformed_img)
 
-# cv2.imshow('thresholded image', LBP(cr))
 
 blocks = np.zeros(cr.shape)
 im_h, im_w = (cr.shape[:2])
@@ -58,15 +61,16 @@ print(cr[0])
 print("****************")
 print(img1[0])
 
-cv2.imshow('thresholded image', LBP(cr))
+
+cv2.imshow('thresholded image', LBP_3x3(cr))
 
 
-#TRY to apply LBP to each block instead of all of it 
+#TRY to apply LBP_3x3 to each block instead of all of it for better results
 
 # for row in np.arange(im_h - bl_h + 1, step=bl_h):
 #     for col in np.arange(im_w - bl_w + 1, step=bl_w):
 #         print(img[row:row+bl_h, col:col+bl_w])
-#         blocks[row:row+bl_h, col:col+bl_w] = LBP(img[row:row+bl_h, col:col+bl_w])
+#         blocks[row:row+bl_h, col:col+bl_w] = LBP_3x3(img[row:row+bl_h, col:col+bl_w])
         # if(row==0 and col ==0):
         #     print(img[row:row+bl_h, col:col+bl_w])
         #     print("+++++++++++++++++++++++++++++")
@@ -74,5 +78,6 @@ cv2.imshow('thresholded image', LBP(cr))
         
 # print(blocks)
 # cv2.imshow('img',blocks)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
