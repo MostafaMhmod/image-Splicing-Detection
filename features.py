@@ -57,6 +57,16 @@ blocks = np.zeros(cr.shape)
 im_h, im_w = (cr.shape[:2])
 bl_h, bl_w = 16, 16
 
+# hist,bins = np.histogram(img.flatten(),256,[0,256])
+
+# cdf = hist.cumsum()
+# cdf_normalized = cdf * hist.max()/ cdf.max()
+# plt.plot(cdf_normalized, color = 'b')
+# plt.hist(transformed_img.flatten(),256,[0,256], color = 'r')
+# plt.xlim([0,256])
+# plt.legend(('cdf','histogram'), loc = 'upper left')
+# plt.show()
+
 crChannelAfterLBP = LBP_3x3(cr)
 dctMatrix=dct_2D(crChannelAfterLBP)
 
