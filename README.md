@@ -24,5 +24,5 @@ Files structure : <br />
 ------valid: <br />
 ---------img1.jpg <br />
 ---------img2.jpg <br />
----------img3.jpg <br />
+---------img3.jpg
 
